@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import br.com.malvezzi.wordie.wordie.decks.dto.DeckRequest;
 import br.com.malvezzi.wordie.wordie.decks.dto.DeckResponse;
 import br.com.malvezzi.wordie.wordie.decks.model.Deck;
 import br.com.malvezzi.wordie.wordie.decks.repository.DeckRepository;
+import br.com.malvezzi.wordie.wordie.user.model.User;
+import br.com.malvezzi.wordie.wordie.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -16,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class DeckServiceImpl implements DeckService {
   
   private final DeckRepository deckRepository;
+  private final UserRepository userRepository;
 
   @Override
   public List<DeckResponse> getDecksByUserId(UUID userId) {
@@ -31,5 +35,20 @@ public class DeckServiceImpl implements DeckService {
 
     return deckResponse;
   }
+  
+  @Override
+  public void createNewDeck(UUID userId, DeckRequest deckRequest) {
+    User user = userRepository.findById(userId)
+        .orElseThrow(() -> new RuntimeException("Usuário não encontrado: " + userId));
+
+    Deck deck = Deck.builder()
+          .name(deckRequest.name())
+          .description(deckRequest.description())
+          .user(user)
+          .build();
     
+    deckRepository.save(deck);
+  }
+
+
 }
