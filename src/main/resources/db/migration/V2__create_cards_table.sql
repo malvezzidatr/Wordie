@@ -1,0 +1,7 @@
+CREATE TABLE cards (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  deck_id UUID NOT NULL REFERENCES decks(id) ON DELETE CASCADE,
+  front VARCHAR(255) NOT NULL,
+  back VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL
+);
