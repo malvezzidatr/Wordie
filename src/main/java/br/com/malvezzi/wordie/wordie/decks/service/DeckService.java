@@ -10,4 +10,5 @@ public interface DeckService {
 
     List<DeckResponse> getDecksByUserId(UUID userId);
     void createNewDeck(UUID userId, DeckRequest deckRequest);
+
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.malvezzi.wordie.wordie.card.model.Card;
 import br.com.malvezzi.wordie.wordie.decks.dto.DeckRequest;
 import br.com.malvezzi.wordie.wordie.decks.dto.DeckResponse;
 import br.com.malvezzi.wordie.wordie.decks.service.DeckService;
@@ -24,7 +25,7 @@ public class DeckController {
 
   @GetMapping("/{userId}")
   public List<DeckResponse> getUserDecks(@PathVariable UUID userId) {
-      return deckService.getDecksByUserId(userId);
+    return deckService.getDecksByUserId(userId);
   }
   
   @PostMapping("/{userId}")
@@ -34,4 +35,5 @@ public class DeckController {
   ) {
     deckService.createNewDeck(userId, deckRequest);
   }
+
 }

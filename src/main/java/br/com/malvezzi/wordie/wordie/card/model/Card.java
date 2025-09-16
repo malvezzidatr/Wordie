@@ -5,6 +5,8 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.malvezzi.wordie.wordie.card.model.Card;
 import br.com.malvezzi.wordie.wordie.decks.model.Deck;
 
@@ -30,6 +32,7 @@ public class Card {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "deck_id", nullable = false)
+    @JsonIgnore
     private Deck deck;
 
     @Column(nullable = false, updatable = false)

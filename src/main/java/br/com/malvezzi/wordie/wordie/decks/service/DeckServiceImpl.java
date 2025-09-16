@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import br.com.malvezzi.wordie.wordie.card.model.Card;
 import br.com.malvezzi.wordie.wordie.decks.dto.DeckRequest;
 import br.com.malvezzi.wordie.wordie.decks.dto.DeckResponse;
 import br.com.malvezzi.wordie.wordie.decks.model.Deck;
@@ -49,6 +50,5 @@ public class DeckServiceImpl implements DeckService {
     
     deckRepository.save(deck);
   }
-
 
 }
