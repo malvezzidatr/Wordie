@@ -8,7 +8,7 @@ import br.com.malvezzi.wordie.wordie.card.dto.CreateCardRequest;
 
 public interface CardService {
 
-  void createNewCard(UUID deckId, CreateCardRequest createCardRequest);
+  void createNewCard(UUID deckId, List<CreateCardRequest> createCardRequest);
   List<CardResponse> getDeckCards(UUID deckId);
 
 }

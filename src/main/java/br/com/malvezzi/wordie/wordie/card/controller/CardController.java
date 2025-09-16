@@ -25,7 +25,7 @@ public class CardController {
   @PostMapping("/v1/card/new/{deckId}")
   public void createNewCard(
     @PathVariable UUID deckId,
-    @RequestBody CreateCardRequest createCardRequest
+    @RequestBody List<CreateCardRequest> createCardRequest
   ) {
     cardService.createNewCard(deckId, createCardRequest);
   }

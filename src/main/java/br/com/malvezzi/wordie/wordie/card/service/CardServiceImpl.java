@@ -11,7 +11,6 @@ import br.com.malvezzi.wordie.wordie.card.model.Card;
 import br.com.malvezzi.wordie.wordie.card.repository.CardRepository;
 import br.com.malvezzi.wordie.wordie.decks.model.Deck;
 import br.com.malvezzi.wordie.wordie.decks.repository.DeckRepository;
-import br.com.malvezzi.wordie.wordie.user.model.User;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -22,17 +21,19 @@ public class CardServiceImpl implements CardService {
   private final DeckRepository deckRepository;
 
   @Override
-  public void createNewCard(UUID deckId, CreateCardRequest createCardRequest) {
+  public void createNewCard(UUID deckId, List<CreateCardRequest> createCardRequest) {
     Deck deck = deckRepository.findById(deckId)
         .orElseThrow(() -> new RuntimeException("Deck não encontrado: " + deckId));
 
-    Card card = Card.builder()
-            .front(createCardRequest.front())
-            .back(createCardRequest.back())
-            .deck(deck)
-            .build();
+    List<Card> card = createCardRequest.stream()
+            .map(req -> Card.builder()
+                .front(req.front())
+                .back(req.back())
+                .deck(deck)
+                .build())
+            .toList();
     
-    cardRepository.save(card);
+    cardRepository.saveAll(card);
   }
 
   @Override
